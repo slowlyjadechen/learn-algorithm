@@ -4,9 +4,7 @@
 
 ## 递归反转链表的一部分
 
-[LeetCode 92 反转链表II
-
-[](https://leetcode-cn.com/problems/reverse-linked-list-ii/)
+[LeetCode 92 反转链表II](https://leetcode-cn.com/problems/reverse-linked-list-ii/)
 
 题目描述：
 
