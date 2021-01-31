@@ -8,7 +8,7 @@
 
 题目描述：
 
-<img src="E:\document\笔记\数据结构和算法lubuladong\chapter1\reverselist.png" alt="reverselist" style="zoom:80%;" />
+<img src="https://github.com/slowlyjadechen/learn-algorithm/tree/main/Chapter1/picture/reverselist.png" alt="reverselist" style="zoom:80%;" />
 
 按照如下思路对于问题进行探讨：
 
@@ -30,12 +30,12 @@ class ListNode:
 
 - 如果存在多个节点
 
-  <img src="E:\document\笔记\数据结构和算法lubuladong\chapter1\traverseall.png" alt="traverseall" style="zoom:80%;" />
+  <img src="https://github.com/slowlyjadechen/learn-algorithm/tree/main/Chapter1/picture/traverseall.png" alt="traverseall" style="zoom:80%;" />
 
   - 先反转除了头结点以外的所有节点，注意到，<u>反转的函数输入为待反转的链表的头结点，返回的是反转后的链表的头结点——即原始待反转链表的最后一个节点</u>，记为last。
   - 这时，问题就简化为反转只有两个节点的链表（将头结点的后继节点反转的结果视为一整个节点），只需改动节点后继指针即可实现。
 
-  <img src="E:\document\笔记\数据结构和算法lubuladong\chapter1\traverseall2.png" alt="traverseall2" style="zoom:80%;" />
+  <img src="https://github.com/slowlyjadechen/learn-algorithm/tree/main/Chapter1/picture/traverseall2.png" alt="traverseall2" style="zoom:80%;" />
 
   - 最后输出last作为整个函数的结果。
 
@@ -123,7 +123,7 @@ LeetCode地址：https://leetcode-cn.com/problems/reverse-nodes-in-k-group/
 
 题目描述：
 
-<img src="E:\document\笔记\数据结构和算法lubuladong\chapter1\kgrouptraverse.png" alt="kgrouptraverse" style="zoom:80%;" />
+<img src="https://github.com/slowlyjadechen/learn-algorithm/tree/main/Chapter1/picture/kgrouptraverse.png" alt="kgrouptraverse" style="zoom:80%;" />
 
 分析：
 
@@ -163,7 +163,7 @@ https://leetcode-cn.com/problems/palindrome-linked-list/
 
 题目描述：
 
-<img src="E:\document\笔记\数据结构和算法lubuladong\chapter1\palindromelinklist.png" alt="palindromelinklist" style="zoom:80%;" />
+<img src="https://github.com/slowlyjadechen/learn-algorithm/tree/main/Chapter1/picture/palindromelinklist.png" alt="palindromelinklist" style="zoom:80%;" />
 
 分析：
 
