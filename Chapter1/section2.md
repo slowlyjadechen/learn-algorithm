@@ -4,11 +4,13 @@
 
 ## 递归反转链表的一部分
 
-[LeetCode 92 反转链表II](https://leetcode-cn.com/problems/reverse-linked-list-ii/)
+[LeetCode 92 反转链表II
+
+[](https://leetcode-cn.com/problems/reverse-linked-list-ii/)
 
 题目描述：
 
-<img src="https://github.com/slowlyjadechen/learn-algorithm/tree/main/Chapter1/picture/reverselist.png" alt="reverselist" style="zoom:80%;" />
+![](https://github.com/slowlyjadechen/learn-algorithm/tree/main/Chapter1/picture/reverselist.png)
 
 按照如下思路对于问题进行探讨：
 
