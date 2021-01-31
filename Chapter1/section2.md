@@ -10,7 +10,7 @@
 
 题目描述：
 
-![](https://github.com/slowlyjadechen/learn-algorithm/tree/main/Chapter1/picture/reverselist.png)
+![](https:\github.com\slowlyjadechen\learn-algorithm\tree\main\Chapter1\picture\reverselist.png)
 
 按照如下思路对于问题进行探讨：
 
