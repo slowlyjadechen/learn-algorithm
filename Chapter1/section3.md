@@ -1,5 +1,7 @@
 # 递归——二叉树篇
 
+内容整理自labuladong算法小抄[原文链接](https://labuladong.gitbook.io/algo/shu-ju-jie-gou-xi-lie/shou-ba-shou-shua-er-cha-shu-xun-lian-di-gui-si-wei/er-cha-shu-xi-lie-1)
+
 ## 总结
 
 <span style="color:red">把题目的要求细化，搞清楚根节点应该做什么，然后剩下的事情抛给前/中/后序的遍历框架就行了</span>
@@ -259,9 +261,41 @@ class Solution:
         return build(inorder, 0, len(inorder)-1, postorder, 0, len(postorder)-1)
 ```
 
-
-
-
-
 #### [寻找重复的子树](https://leetcode-cn.com/problems/find-duplicate-subtrees/)
+
+分析：
+
+- 是否存在重复需要将以任意两个节点为根节点的子树进行比较，比较之前需要将两个子树表示出来。可以使用前、中、后、层次三种遍历方法表示一棵树，但是单独一种遍历序列不能唯一表示一棵树，不能的原因在于：缺失、叶子节点导致单纯由一种遍历序列不能判断出根节点、左子树部分和右子树部分，从而存在同一个序列对应多个树结构的情况。那么，就使用符号将缺失和子树的分界表示出来，使得一种遍历可以唯一确定一棵树。
+- 相同的子树只要在结果中输出其中一个根节点就可以，当存在多个重复的情况是时，要考虑去重。
+
+> 由遍历序列唯一表示一棵树：
+>
+> - 前序+中序
+> - 后序+中序
+> - 层次+中序
+
+```python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def findDuplicateSubtrees(self, root: TreeNode) -> List[TreeNode]:
+        res = []
+        counter = collections.Counter()
+                
+        def traverse(root):
+            if not root: return '#'
+            left = traverse(root.left)
+            right = traverse(root.right)
+            chain = left + ',' + right + ',' + str(root.val)
+            counter[chain] += 1
+            if counter[chain] == 2: res.append(root)
+            return chain
+        
+        traverse(root)
+        return res
+```
 
