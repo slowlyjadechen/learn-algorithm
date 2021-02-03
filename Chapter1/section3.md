@@ -143,5 +143,125 @@ class Solution:
         p.right = rightnew
 ```
 
+#### [最大二叉树](https://leetcode-cn.com/problems/maximum-binary-tree/)
 
+分析：
+
+- 找到最大值对应的位置，将数组切分，并且使用最大值构造根节点
+- 对于切分成的左右子数组，递归构造左右子树
+
+```python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def constructMaximumBinaryTree(self, nums: List[int]) -> TreeNode:
+        # 寻找子数组中的最大值和索引，子数组通过首末元素索引定位
+        def findmax(nums, start, end):
+            maxval = nums[start]
+            maxindex = start
+            for i in range(start, end):
+                if nums[i] > maxval:
+                    maxval = nums[i]
+                    maxindex = i
+            root = TreeNode(maxval)
+            root.left = self.constructMaximumBinaryTree(nums[:maxindex])
+            root.right = self.constructMaximumBinaryTree(nums[maxindex+1:])
+            return root
+
+        if not nums:
+            return 
+        return findmax(nums, 0, len(nums))
+```
+
+> 只讲寻找最大值封装，其他部分在函数外为什么一直报递溢出？？？
+
+
+
+#### [从前序与中序遍历序列构造二叉树](https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/)
+
+分析：
+
+- 由前序遍历中序遍历的规则可以找到根节点的位置，进而拆分序列为子树队一行的序列
+- 难点在于前序序列如何正确划分出左右子树对应的序列。在中序序列中找到根节点就可划分左右子树对应的序列，从而可以求得左右子树的长度，就可在前序序列中找到左右子树对应的子序列。
+
+```python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def buildTree(self, preorder: List[int], inorder: List[int]) -> TreeNode:
+        def build(preorder, preStart, preEnd, inorder, inStart, inEnd):
+            if preStart > preEnd:
+                return 
+            #  root 节点对应的值就是前序遍历数组的第一个元素
+            rootVal = preorder[preStart]
+            #  rootVal 在中序遍历数组中的索引
+            index = inStart
+            while index <= inEnd:
+                if inorder[index] == rootVal:
+                    break
+                index += 1
+            leftSize = index - inStart
+
+            #  先构造出当前根节点
+            root = TreeNode(rootVal)
+            #  递归构造左右子树
+            root.left = build(preorder, preStart + 1, preStart + leftSize, inorder, inStart, index - 1)
+            root.right = build(preorder, preStart + leftSize + 1, preEnd, inorder, index + 1, inEnd)
+            return root
+        return build(preorder, 0, len(preorder) - 1, inorder, 0, len(inorder) - 1)
+```
+
+注意：
+
+- 设置多个有关索引的问题时，为了防止混乱定义要统一，要么都是按照数组索引（从0开始）来写，要么都按照次序编写（从1开始）；要么都包含最后一个元素，要么都不包含。也就就是要明确函数的定义具体是什么（此处对应入参的含义）
+- 把握递归的主题逻辑，但是不要忘了basecase
+
+#### [从中序与后序遍历序列构造二叉树](https://leetcode-cn.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/)
+
+分析：
+
+- 想法和使用前序+中序类似，利用后序遍历序列的特点寻找根节点，在到中序序列中划分子树序列，使用子序列长度进一步划分后序序列
+
+```python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def buildTree(self, inorder: List[int], postorder: List[int]) -> TreeNode:
+        def build(inorder, startin, endin, postorder, startpost, endpost):
+            # 入参是要考虑数组的完整始末索引
+            # basecase
+            if startpost > endpost:
+                return 
+
+            root = TreeNode(postorder[endpost])
+            index = startin
+            while index <= endin:
+                if inorder[index] == postorder[endpost]:
+                    break
+                index += 1
+            leftsize = index - startin
+            root.left = build(inorder, startin, index-1, postorder, startpost, startpost+leftsize-1)
+            root.right = build(inorder, index+1, endin, postorder, startpost+leftsize, endpost-1)
+            return root
+        
+        return build(inorder, 0, len(inorder)-1, postorder, 0, len(postorder)-1)
+```
+
+
+
+
+
+#### [寻找重复的子树](https://leetcode-cn.com/problems/find-duplicate-subtrees/)
 
